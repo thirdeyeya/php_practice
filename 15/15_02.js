@@ -32,10 +32,22 @@ class Item {
     }
 }
 
-let item1 = new Item('0001', 'ダイニングチェア', 100);
-let item2 = new Item('0002', 'キャスター付き椅子', 100);
-let item3 = new Item('0003', 'スツール', 50);
+class Chair extends Item {
+    constructor(id, name, stock, used) {
+        //　引数の値を使ってプロパティの初期化を行う
+        super(id, name, stock);
+        this.used = used;           //　中古ならtrue新品ならfalse
+    }
+
+    getUsed() {
+        return this.used;
+    }
+}
+
+let item1 = new Item('0001', 'ダイニングチェア', 100, true);
+let item2 = new Item('0002', 'キャスター付き椅子', 100, false);
+let item3 = new Item('0003', 'スツール', 50, false);
 
 console.log(item1.getId(), item1.getName(), item1.getStock());
-console.log(item2.getId(), item2.getName(), item2.getName(), item2.getStock());
+console.log(item2.getId(), item2.getName(), item2.getStock());
 console.log(item3.getId(), item3.getName(), item3.getStock());
