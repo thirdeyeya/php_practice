@@ -25,6 +25,8 @@ $(function () {
       $('#apod-image').attr('src', res.url);
       $('#apod-title').html(res.title);
       $('#apod-desc').html(res.explanation);
+      $('#apod-copyright').html(res.copyright);
+      $('#apod-date').html(res.date);
     })
     .fail(function (res) {
         

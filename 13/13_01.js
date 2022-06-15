@@ -3,7 +3,7 @@
       '家具',
       'ベッド・マットレス',
       '収納家具・収納グッズ',
-      '子ども家具'
+      '子ども家具',
       '調理器具'
    ];
    
@@ -18,9 +18,9 @@
        
        ['家具・ラック','収納システム'],
        
-       ['子供部屋家具','ベビー家具・ベビーグッズ']
+       ['子供部屋家具','ベビー家具・ベビーグッズ'],
        
-       ['調理器具']
+       ['包丁','まな板','ボウル','菜箸']
        
     ];
     
@@ -51,7 +51,7 @@
    
        cate1Element.innerHTML = '';
        
-       for (let i = 0; i < cate1.length; i++)
+       for (let i = 0; i < cate1.length; i++){
        
            let option = document.createElement('option');
            option.value = cate1[i];
@@ -68,15 +68,13 @@
         
         cate2Element.innerHTML = '';
         
-        for (let i = 0, i < cate2[1].length; i++) {
-            
-            let option = document.createElement('option');
-            option.value = cate2[idx][i];
-            
-            option.text = cate2[idx][i];
-            
-            cate2Element.appendChild(option);
+        for (let subcate in cate2[idx]) {
+          let option = document.createElement('option');
+          option.value = subcate[i];
+          option.text = subcate[i];
+          cate2Element.appendChild(option);
         }
+       
     }
     
     function viewItemList(tag) {
