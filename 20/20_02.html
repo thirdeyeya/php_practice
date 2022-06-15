@@ -6,7 +6,11 @@
 </head>    
 <body>
     
-  <div id="app">{{ msg }}</div>
+  <div id="app">
+    <select>
+      <option v-for="m in msgs">{{ m }}</option>
+    </select>
+  </div>
   
   <script src="20_02.js" charset="UTF-8"></script>
 </body>

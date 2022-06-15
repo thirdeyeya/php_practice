@@ -1,10 +1,10 @@
-let initAPP = {
-  el:'#app',
+let app = new Vue({
+  el: '#app',
   data : {
-    msg:'おはよう'
+    msgs: ["おはよう", "こんばんは", "お元気ですか"] 
   }
-};
+});
 
-let app = new Vue(initAPP);
+
 
 
