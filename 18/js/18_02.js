@@ -34,54 +34,79 @@ function setMainMenu() {
 }
 
 // 小分類のoptionを追加する関数
-function setSubMenu(idx) {
+function setSubMenu() {
     // 取得したselectの子要素（option）を空白にすることによってすべて削除
     cate2Element.innerHTML = "";
 
     // 大分類の配列に保存されている数だけoptionとして追加する
-    for (let i = 0; i < cate2[idx].length; i++) {
+    for (let i = 0; i < cate2.length; i++) {
         // option要素を新規に作成
         let option = document.createElement('option');
-        option.value = cate2[idx][i];    // optionの値に配列の値を代入
-        option.text = cate2[idx][i];     // optionの表示文字列に配列の値を代入
+        option.value = cate2[i];    // optionの値に配列の値を代入
+        option.text = cate2[i];     // optionの表示文字列に配列の値を代入
         cate2Element.appendChild(option); // select要素の子要素としてoption要素を追加        
     }
 }
 
 // 商品一覧をtableとして表示
-function viewItemList(tag) {
-    console.log(tag);
+function viewItemList(tag1,tag2) {
+    console.log(tag1,tag2);
     let target = document.getElementById('itemList');
-
+    
     // 商品一覧を削除
     target.innerHTML = "";
 
-    if (tag !== undefined) {
+    if (isSearchItem(itemList[i],cate1,cate2)) {
         let html = "";
         html += "<table>";
         let count = 0;
-        for (let i = 0; i < itemList.length; i++) {
-            if (itemList[i].tags.some(t => t === tag)) {
-                if (count === 0) {
-                  html += "<tr>";
-                }
+        function isSearchItem(item, cate1, cate2) {
+           if (cate1 !=='---' && cate2 === '---') {
+               for (let i = 0; i < itemList.length; i++) {
+                   if (itemList[i].tags.some(t => t === tag1)) {
+                       if (count === 0) {
+                        html += "<tr>";
+                       }
+                       
+           if (cate1 ==='---' && cate2 !== '---') {
+               for (let i = 0; i < itemList.length; i++) {
+                   if (itemList[i].tags.some(t => t === tag2)) {
+                       if (count === 0) {
+                        html += "<tr>";
+                       }           
+               
+           if (cate1 !=='---' && cate2 !== '---') {
+               for (let i = 0; i < itemList.length; i++) {
+                   if (itemList[i].tags.some(t => t === tag2)) {
+                       if (count === 0) {
+                        html += "<tr>";
+                       }           
+           
+                       // 商品情報
+                       html += "<td>";
+                       html += '<img src="img/item-sample.jpg" alt="商品の名前" width="180" height="123" />';
+                       html += '<p>商品名：&nbsp;' + itemList[i].name + '</p>';
+                       html += '<p>価格：&nbsp;&yen;' + itemList[i].price + '</p>';
+                       html += '<span><i class="fas fa-shopping-cart">ショッピングカート</i></span>';
+                       html += "</td>";
 
-                // 商品情報
-                html += "<td>";
-                html += '<img src="img/item-sample.jpg" alt="商品の名前" width="180" height="123" />';
-                html += '<p>商品名：&nbsp;' + itemList[i].name + '</p>';
-                html += '<p>価格：&nbsp;&yen;' + itemList[i].price + '</p>';
-                html += '<span><i class="fas fa-shopping-cart">ショッピングカート</i></span>';
-                html += "</td>";
-
-                if (count == 5)  {   // 商品を横に５つ並べたら次の行に変更
-                    html += "</tr>";
-                    count = 0;
-                } else {
-                    count++;
-                }
-            }
-        }
+                       if (count == 5)  {
+                           // 商品を横に５つ並べたら次の行に変更
+                           html += "</tr>";
+                           count = 0;
+                       } else {
+                           count++;
+                       }
+                   }
+               }
+           }
+                   }
+               }
+           }
+                   }
+               }
+           }
+        }   
         if (count > 0) html += "</tr>"; // 最後に閉じる
         html += "</table>";
         target.innerHTML = html;
@@ -92,11 +117,8 @@ function viewItemList(tag) {
 // 大分類の選択された時のイベントリスナー
 cate1Element.addEventListener('change', function(){
     // 選択されば番号を取得
-    let idx = cate1Element.selectedIndex;
-    // 大分類の選択に合わせて、小分類の生成
-    setSubMenu(idx);
-    //　小分類が選択されたときに、最初に表示される値
-    viewItemList(cate2[idx][0]);
+    let val = cate1Element.value;
+    viewItemList(val);
 });
 
 // 小分類の選択された時のイベントリスナー
